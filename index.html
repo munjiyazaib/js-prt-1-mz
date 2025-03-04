@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CALCULATOR</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -19,7 +20,6 @@
             height: 100vh;
             margin: 0;
             background-color: white;
-
         }
 
         .calculator {
@@ -27,7 +27,6 @@
             border-radius: 10px;
             padding: 20px;
             background: black;
-            /* background: linear-gradient(black, maroon);*/
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -70,30 +69,17 @@
             grid-column: span 4;
         }
 
-     
-        .button.operator-1{
+        .button.operator-1 {
             background-color: red;
             color: #fff;
         }
-
-        /* .button.operator:hover {
-            background-color: rgb(221, 120, 167);
-        }
-      .button:hover {
-            background-color: #ddd;
-        } 
-        .button.equal:hover {
-            background: linear-gradient(rgb(199, 64, 109), rgb(221, 120, 167));
-            color: white;
-
-        } */
     </style>
 </head>
 
 <body>
 
     <div class="calculator">
-        <input type="text" id="display" class="display" disabled>
+        <input type="text" id="display" class="display" value="0" disabled>
         <div class="buttons">
             <div class="button" onclick="appendToDisplay('1')">1</div>
             <div class="button" onclick="appendToDisplay('2')">2</div>
@@ -107,36 +93,45 @@
             <div class="button" onclick="appendToDisplay('8')">8</div>
             <div class="button" onclick="appendToDisplay('9')">9</div>
             <div class="button operator" onclick="appendToDisplay('*')">*</div>
-            
             <div class="button operator-1" onclick="clearDisplay()">C</div>
             <div class="button" onclick="appendToDisplay('0')">0</div>
             <div class="button" onclick="appendToDisplay('.')">.</div>
             <div class="button operator" onclick="appendToDisplay('/')">/</div>
-            <!-- <div class="button operator" onclick="clearDisplay()">C</div> -->
             <div class="button equal" onclick="calculate()">=</div>
-
         </div>
     </div>
 
-
     <script>
+        let resetDisplay = false;
 
         function appendToDisplay(value) {
             const display = document.getElementById('display');
-            display.value += value;
+
+            if (resetDisplay) {
+                display.value = "0"; // Reset display to 0 after calculation
+                resetDisplay = false;
+            }
+
+            if (display.value === "0" && !isNaN(value)) {
+                display.value = value; // Replace 0 with first number
+            } else {
+                display.value += value; // Append normally
+            }
         }
 
         function calculate() {
             const display = document.getElementById('display');
             try {
                 display.value = eval(display.value);
+                resetDisplay = true; // Set flag to reset on next input
             } catch {
                 display.value = 'Error';
             }
         }
+
         function clearDisplay() {
             const display = document.getElementById('display');
-            display.value = '';
+            display.value = "0"; // Reset to 0 instead of empty
         }
     </script>
 </body>

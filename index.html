@@ -109,37 +109,34 @@
     </div>
     <script>
         let resetDisplay = false;
-
+    
         function appendToDisplay(value) {
             const display = document.getElementById('display');
-
+    
             if (resetDisplay) {
-                display.value = "0"; // Reset display to 0 after calculation
+                display.value = isNaN(value) ? display.value + value : "0"; 
                 resetDisplay = false;
-            }
-
-            if (display.value === "0" && !isNaN(value)) {
-                display.value = value; // Replace 0 with first number
             } else {
-                display.value += value; // Append normally
+                display.value = display.value === "0" ? value : display.value + value;
             }
         }
-
+       
+    
         function calculate() {
             const display = document.getElementById('display');
             try {
                 display.value = eval(display.value);
-                resetDisplay = true; // Set flag to reset on next input
+                resetDisplay = true; 
             } catch {
                 display.value = 'Error';
             }
         }
-
+    
         function clearDisplay() {
-            const display = document.getElementById('display');
-            display.value = "0"; // Reset to 0 instead of empty
+            document.getElementById('display').value = "0"; 
         }
     </script>
+    
 </body>
 
 </html>

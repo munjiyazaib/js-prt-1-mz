@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -106,34 +105,45 @@
                 <div class="button equal" onclick="calculate()">=</div>
             </div>
         </div>
-    </div>
-    <script>
+    </div><script>
         let resetDisplay = false;
-    
+
         function appendToDisplay(value) {
             const display = document.getElementById('display');
-    
+            console.log("Pressed:", value);
+            console.log("resetDisplay before:", resetDisplay);
+
             if (resetDisplay) {
-                display.value = isNaN(value) ? display.value + value : "0"; 
+                display.value = isNaN(value) ? display.value + value : "0";
+                console.log("Display reset, new value:", display.value);
                 resetDisplay = false;
             } else {
                 display.value = display.value === "0" ? value : display.value + value;
+                console.log("Display updated:", display.value);
             }
+
+            console.log("resetDisplay after:", resetDisplay);
         }
-       
-    
+
         function calculate() {
             const display = document.getElementById('display');
+            console.log("Calculating:", display.value);
+
             try {
                 display.value = eval(display.value);
-                resetDisplay = true; 
+                console.log("Result:", display.value);
+                resetDisplay = true;
             } catch {
                 display.value = 'Error';
+                console.log("Error in expression");
             }
+
+            console.log("resetDisplay set to:", resetDisplay);
         }
-    
+
         function clearDisplay() {
-            document.getElementById('display').value = "0"; 
+            document.getElementById('display').value = "0";
+            console.log("Display cleared");
         }
     </script>
     

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,25 +12,27 @@
             box-sizing: border-box;
         }
 
-        body{
+        body {
+            height: 100vh;
+            width: 100%;
             font-family: Arial, sans-serif;
+            overflow: hidden;
+            background: linear-gradient(#739bbb, #772f47);
         }
+
         .body-calculator {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: white;
             flex-direction: column;
             gap: 17px;
         }
 
         .calculator {
-            border: 1px solid #ccc;
             border-radius: 10px;
             padding: 20px;
-            background: black;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -52,13 +55,14 @@
             gap: 15px;
         }
 
-        .button {
-            padding: 20px;
-            font-size: 1.2em;
-            border-radius: 33px;
-            background-color: #d9cfcf;
+        button {
+            color: white;
+            padding: 13px;
+            font-size: 25px;
+            background-color: transparent;
             cursor: pointer;
             text-align: center;
+            border: none;
         }
 
         .button.operator {
@@ -76,77 +80,243 @@
             background-color: red;
             color: #fff;
         }
+
+
+
+
+
+        .bubbles {
+            position: absolute;
+            bottom: -120px;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 70px;
+            width: 100%;
+            justify-content: space-around;
+        }
+
+        .bubbles span {
+            height: 60px;
+            width: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: move 10s linear infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes move {
+            100% {
+                transform: translateY(-100vh);
+            }
+        }
+
+        .bubbles span.one {
+            animation-delay: 2.2s;
+            transform: scale(2.15)
+        }
+
+        .bubbles span.two {
+            animation-delay: 3.5s;
+            transform: scale(1.55)
+        }
+
+        .bubbles span.three {
+            animation-delay: 0.2s;
+            transform: scale(0.35)
+        }
+
+        .bubbles span.four {
+            animation-delay: 6s;
+            transform: scale(2.15)
+        }
+
+        .bubbles span.five {
+            animation-delay: 7s;
+            transform: scale(0.5)
+        }
+
+        .bubbles span.six {
+            animation-delay: 4s;
+            transform: scale(2.5)
+        }
+
+        .bubbles span.seven {
+            animation-delay: 3;
+            transform: scale(1.5)
+        }
+
+        .bubbles span:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 60px;
+            width: 40%;
+            transform: skew(45deg) translateX(150px);
+            background: rgba(255, 255, 255, 0.15);
+            animation: mirror 3s linear infinite;
+        }
+
+        @keyframes mirror {
+            100% {
+                transform: translateX(-450px);
+            }
+        }
+
+        .bubbles span.one:before {
+            animation-delay: 1.5s;
+        }
+
+        .bubbles span.two:before {
+            animation-delay: 3.5s;
+        }
+
+        .bubbles span.three:before {
+            animation-delay: 2.5s;
+        }
+
+        .bubbles span.four:before {
+            animation-delay: 7.5s;
+        }
+
+        .bubbles span.five:before {
+            animation-delay: 4.5s;
+        }
+
+        .bubbles span.six:before {
+            animation-delay: 0.5s;
+        }
+
+        .bubbles span.seven:before {
+            animation-delay: 6s;
+        }
     </style>
 </head>
 
 <body>
-     
+    <div class="bubbles">
+        <span class="one"></span>
+        <span class="two"></span>
+        <span class="three"></span>
+        <span class="four"></span>
+        <span class="five"></span>
+        <span class="six"></span>
+        <span class="seven"></span>
+        <span class="seven"></span>
+    </div>
+    <div class="bubbles">
+        <span class="one"></span>
+        <span class="two"></span>
+        <span class="three"></span>
+        <span class="four"></span>
+        <span class="five"></span>
+        <span class="six"></span>
+        <span class="seven"></span>
+        <span class="seven"></span>
+    </div>
+    <div class="bubbles">
+        <span class="one"></span>
+        <span class="two"></span>
+        <span class="three"></span>
+        <span class="four"></span>
+        <span class="five"></span>
+        <span class="six"></span>
+        <span class="seven"></span>
+        <span class="seven"></span>
+    </div>
+    <div class="bubbles">
+        <span class="one"></span>
+        <span class="two"></span>
+        <span class="three"></span>
+        <span class="four"></span>
+        <span class="five"></span>
+        <span class="six"></span>
+        <span class="seven"></span>
+        <span class="seven"></span>
+    </div>
+
     <div class="body-calculator">
         <h1>Calculator</h1>
         <div class="calculator">
-            <input type="text" id="display" class="display" value="0" disabled>
+            <input type="text" id="inputBox" class="display" value="0" disabled>
             <div class="buttons">
-                <div class="button" onclick="appendToDisplay('1')">1</div>
-                <div class="button" onclick="appendToDisplay('2')">2</div>
-                <div class="button" onclick="appendToDisplay('3')">3</div>
-                <div class="button operator" onclick="appendToDisplay('+')">+</div>
-                <div class="button" onclick="appendToDisplay('4')">4</div>
-                <div class="button" onclick="appendToDisplay('5')">5</div>
-                <div class="button" onclick="appendToDisplay('6')">6</div>
-                <div class="button operator" onclick="appendToDisplay('-')">-</div>
-                <div class="button" onclick="appendToDisplay('7')">7</div>
-                <div class="button" onclick="appendToDisplay('8')">8</div>
-                <div class="button" onclick="appendToDisplay('9')">9</div>
-                <div class="button operator" onclick="appendToDisplay('*')">*</div>
-                <div class="button operator-1" onclick="clearDisplay()">C</div>
-                <div class="button" onclick="appendToDisplay('0')">0</div>
-                <div class="button" onclick="appendToDisplay('.')">.</div>
-                <div class="button operator" onclick="appendToDisplay('/')">/</div>
-                <div class="button equal" onclick="calculate()">=</div>
+                <button>AC</button>
+                <button>DEL</button>
+                <button>%</button>
+                <button>/</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>*</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>-</button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>+</button>
+                <button>00</button>
+                <button>0</button>
+                <button>.</button>
+                <button>=</button>
             </div>
         </div>
-    </div><script>
-        let resetDisplay = false;
-
-        function appendToDisplay(value) {
-            const display = document.getElementById('display');
-            console.log("Pressed:", value);
-            console.log("resetDisplay before:", resetDisplay);
-
-            if (resetDisplay) {
-                display.value = isNaN(value) ? display.value + value : "0";
-                console.log("Display reset, new value:", display.value);
-                resetDisplay = false;
-            } else {
-                display.value = display.value === "0" ? value : display.value + value;
-                console.log("Display updated:", display.value);
-            }
-
-            console.log("resetDisplay after:", resetDisplay);
-        }
-
-        function calculate() {
-            const display = document.getElementById('display');
-            console.log("Calculating:", display.value);
-
-            try {
-                display.value = eval(display.value);
-                console.log("Result:", display.value);
-                resetDisplay = true;
-            } catch {
-                display.value = 'Error';
-                console.log("Error in expression");
-            }
-
-            console.log("resetDisplay set to:", resetDisplay);
-        }
-
-        function clearDisplay() {
-            document.getElementById('display').value = "0";
-            console.log("Display cleared");
-        }
-    </script>
+    </div>
+    <script>
+        let display = document.getElementById('inputBox');
+        let buttons = document.querySelectorAll('button');
+        let buttonsArray = Array.from(buttons);
+        let string = '';
+        // let lastPressedEqual = false; 
     
+        const operators = ['+', '-', '*', '/'];
+    
+        buttonsArray.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const value = e.target.innerHTML;
+                console.log(`Button pressed: ${value}`);
+    
+                if (value == 'DEL') {
+                    string = string.substring(0, string.length - 1);
+                    display.value = string || 0;
+                    console.log(`After DEL, Expression: ${string || 0}`);
+                } else if (value == 'AC') {
+                    string = '';
+                    display.value = 0;
+                    console.log('Display cleared (AC)');
+                } else if (value == '=') {
+                    try {
+                        string = eval(string).toString();
+                        display.value = string;
+                        // lastPressedEqual = true;
+                        console.log(`Evaluated Result: ${string}`);
+                    } catch {
+                        display.value = 'Error';
+                        string = '';
+                        console.log('Error in expression');
+                    }
+                } else {
+                    if (operators.includes(value)) {
+                        if (operators.includes(string[string.length - 1])) {
+                            string = string.slice(0, -1);
+                            console.log('Replaced last operator');
+                        }
+                        // lastPressedEqual = false;
+                    } else {
+                        if (lastPressedEqual) {
+                            string = '';
+                            // lastPressedEqual = false;
+                            console.log('Starting new expression after =');
+                        }
+                    }
+                    string += value;
+                    display.value = string;
+                    console.log(`Current Expression: ${string}`);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
